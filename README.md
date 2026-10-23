@@ -5,7 +5,7 @@
   <img src="assets/smart_logo.svg" alt="SMART" width="236">
 </picture>
 
-<h3>20 agents</h3>
+<h3>20-agent workflow</h3>
 
 <p><strong>Test whether a published discovery holds in your data.</strong></p>
 
