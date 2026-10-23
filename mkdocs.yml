@@ -1,0 +1,80 @@
+# SMART documentation site.
+#
+# Local preview:
+#   pip install -r requirements-docs.txt
+#   mkdocs serve                      -> http://127.0.0.1:8000
+#
+# Hosting: GitHub Pages at https://cancer-wiki.github.io/SMART/
+#   Built and deployed by .github/workflows/docs.yml on every push to main.
+#   One-time setup: Settings -> Pages -> Source: GitHub Actions.
+
+site_name: SMART
+site_description: Test whether a published discovery holds in your data.
+site_url: https://cancer-wiki.github.io/SMART/
+repo_url: https://github.com/cancer-wiki/SMART
+repo_name: cancer-wiki/SMART
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/smart_logo.svg
+  favicon: assets/smart_logo.svg
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Quick start: quickstart.md
+  - Example reports: example-report.md
+  - Pipeline: pipeline.md
+  - Case folders: cases.md
+  - Batch running: batch.md
+  - Transferability scores: scores.md
+  - Agent reference: agents.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/cancer-wiki/SMART
+    - icon: fontawesome/solid/globe
+      link: https://cancer-wiki.org
