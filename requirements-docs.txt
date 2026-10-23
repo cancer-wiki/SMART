@@ -1,2 +1,0 @@
-# Docs site dependencies. Used by the GitHub Pages workflow. Pin minor versions so a theme release cannot break a deploy.
-mkdocs-material~=9.5
