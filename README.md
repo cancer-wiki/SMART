@@ -103,7 +103,12 @@ For example:
 bash run_pipeline.sh ./results/case1 "10.1038/s41467-025-59282-4" /path/to/your_data.rds
 ```
 
-A browser window opens at the start. Log in to the journal with your own institutional or personal account. Once you're logged in, minimize the window (don't close it), then press Enter in the terminal. The pipeline then runs all 20 steps on its own. Each step's log goes to `Working/logs/`. If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
+A browser window opens at the start.\
+Log in to the journal with your own institutional or personal account.\
+Once you're logged in, minimize the window (don't close it), then press Enter in the terminal.\
+The pipeline then runs all 20 steps on its own.\
+Each step's log goes to `Working/logs/`.\
+If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
 
 | What you get | |
 |---|---|
