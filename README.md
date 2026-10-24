@@ -76,47 +76,37 @@ Every paper you test becomes a lens on your own dataset. Claims that fail, claim
 > [!NOTE]
 > SMART runs on the [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code). Agents execute on Claude Opus.
 
-### 1 · Install
-
-Agents are installed into `~/.claude/agents/`, where the Claude Code CLI picks them up.
+### 1 · Setup
 
 ```bash
 git clone https://github.com/cancer-wiki/SMART.git
 cd SMART
-bash install.sh            # 20 agents + reference files
-bash install_packages.sh   # R and Python dependencies
+bash setup.sh
 ```
 
-<!-- TODO: install_packages.sh does not exist yet. Repo ships install_R_packages.R (R only). -->
+`setup.sh` copies the 20 agents and their reference files into `~/.claude/agents/`, where the Claude Code CLI picks them up. It then installs the R packages (`install_R_packages.R`) and the Python packages (`requirements.txt`), and checks for the command-line tools the pipeline calls.
 
-### 2 · Example case
+SMART needs both **R** and **Python 3**. R runs the analysis. Python downloads the paper and reads `.h5ad` files and xlsx supplements. You also need [`jq`](https://jqlang.github.io/jq/), `pdftotext` (from poppler), and Firefox, Chrome or Edge for logging in to the journal.
 
-Run the bundled example to check the installation end to end.
+### 2 · Run
 
 ```bash
-bash setup_case.sh https://pubmed.ncbi.nlm.nih.gov/PLACEHOLDER/ examples/demo_data.rds demo_case
-cd demo_case
-bash single_case.sh
+bash run_pipeline.sh <output_folder> <paper> <data>
 ```
 
-Open `Outputs/final_report_revised.html` when it finishes. Takes roughly **PLACEHOLDER** on a laptop.
+| Argument | What it is | Example |
+|---|---|---|
+| `<output_folder>` | Where the case folder is created | `./results/case1` |
+| `<paper>` | DOI, PMID, PubMed URL or nature.com URL | `10.1038/s41467-025-59282-4` |
+| `<data>` | Your single-cell dataset, a Seurat `.rds` or AnnData `.h5ad` | `/path/to/your_data.rds` |
 
-> [!TIP]
-> Don't want to wait? [Read a finished report](https://cancer-wiki.github.io/SMART/example-report/) first.
-
-<!-- TODO: needs a demo paper + small public dataset, and a real runtime figure. -->
-
-### 3 · Run on your own
-
-Point the setup script at any PubMed URL and any single-cell dataset. It fetches the paper, links your data into place, and lays out the folders the pipeline expects.
+For example:
 
 ```bash
-bash setup_case.sh <pubmed-url> <path/to/your_data.rds> my_case
-cd my_case
-bash single_case.sh
+bash run_pipeline.sh ./results/case1 "10.1038/s41467-025-59282-4" /path/to/your_data.rds
 ```
 
-<!-- TODO: setup_case.sh does not exist yet. -->
+A browser window opens at the start. Log in to the journal with your own institutional or personal account, then press Enter in the terminal. The pipeline then runs all 20 steps on its own. Each step's log goes to `Working/logs/`. If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
 
 | What you get | |
 |---|---|
@@ -125,9 +115,6 @@ bash single_case.sh
 | `Outputs/plots/` · `results/` | Every figure and statistical table generated. |
 | `Outputs/analysis.R` *or* `analysis.py` | The exact code that was run. Re-runnable on its own. |
 | `Working/` | Drafts, verification checks, definitions and plans. The full audit trail. |
-
-> [!TIP]
-> Running one paper against many datasets, or many papers against one dataset? See [Batch running](https://cancer-wiki.github.io/SMART/batch/).
 
 ## Documentation
 

@@ -1,13 +1,13 @@
 # =============================================================
-# Install all R packages required by TransferAgent pipeline
+# Install all R packages required by the SMART pipeline
 # Run this once on a new machine: Rscript install_R_packages.R
 # =============================================================
 
-cat("Installing TransferAgent R dependencies...\n\n")
+cat("Installing SMART R dependencies...\n\n")
 
 # --- CRAN packages ---
 cran_pkgs <- c("Seurat", "ggplot2", "dplyr", "tidyverse", "msigdbr",
-               "knitr", "kableExtra", "readxl", "devtools", "remotes")
+               "knitr", "kableExtra", "rmarkdown", "readxl", "devtools", "remotes")
 
 cat("=== CRAN packages ===\n")
 for (pkg in cran_pkgs) {

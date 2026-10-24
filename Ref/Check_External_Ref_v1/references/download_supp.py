@@ -19,7 +19,7 @@ import requests
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+UA = f"SMART-downloader/1.0 (academic TDM; mailto:{os.environ.get('SMART_CONTACT_EMAIL', 'unset')})"
 
 
 def get_article_url(doi):
