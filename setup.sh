@@ -1,9 +1,9 @@
 #!/bin/bash
 # Set up SMART on this machine:
 #   1. copy the 20 agents and their reference files to ~/.claude/agents/
-#   2. install the R packages
-#   3. install the Python packages
-#   4. install the command-line tools the pipeline calls (jq, pdftotext)
+#   2. install the command-line tools the pipeline calls (jq, pdftotext)
+#   3. install the R packages
+#   4. install the Python packages
 #
 # Usage:
 #   bash setup.sh                 # everything
@@ -23,26 +23,8 @@ if [ "${1:-}" = "--agents-only" ]; then
   exit 0
 fi
 
-# --- 2. R packages ---
-echo "[2/4] Installing R packages (this can take a while the first time)..."
-if command -v Rscript >/dev/null 2>&1; then
-  Rscript "$SCRIPT_DIR/install_R_packages.R"
-else
-  echo "      ERROR: Rscript not found. Install R (https://cran.r-project.org) and re-run."
-  exit 1
-fi
-
-# --- 3. Python packages ---
-echo "[3/4] Installing Python packages..."
-if command -v python3 >/dev/null 2>&1; then
-  python3 -m pip install -r "$SCRIPT_DIR/requirements.txt"
-else
-  echo "      ERROR: python3 not found. Install Python 3 and re-run."
-  exit 1
-fi
-
-# --- 4. Command-line tools (jq, pdftotext) ---
-echo "[4/4] Installing command-line tools..."
+# --- 2. Command-line tools (jq, pdftotext) ---
+echo "[2/4] Installing command-line tools..."
 install_tool() {   # $1 = command, $2 = Homebrew package, $3 = apt package
   if command -v "$1" >/dev/null 2>&1; then
     echo "      ok       $1"
@@ -56,15 +38,38 @@ install_tool() {   # $1 = command, $2 = Homebrew package, $3 = apt package
 }
 install_tool jq        jq      jq
 install_tool pdftotext poppler poppler-utils
+# On Linux, R builds hdf5r (for Cell Ranger .h5 files) from source and needs the HDF5 library.
+if [ "$(uname)" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
+  sudo apt-get install -y libhdf5-dev
+fi
 
+# --- 3. R packages ---
+echo "[3/4] Installing R packages (this can take a while the first time)..."
+if command -v Rscript >/dev/null 2>&1; then
+  Rscript "$SCRIPT_DIR/install_R_packages.R"
+else
+  echo "      ERROR: Rscript not found. Install R (https://cran.r-project.org) and re-run."
+  exit 1
+fi
+
+# --- 4. Python packages ---
+echo "[4/4] Installing Python packages..."
+if command -v python3 >/dev/null 2>&1; then
+  python3 -m pip install -r "$SCRIPT_DIR/requirements.txt"
+else
+  echo "      ERROR: python3 not found. Install Python 3 and re-run."
+  exit 1
+fi
+
+# --- Final check ---
+echo ""
 missing=0
 for tool in claude jq pdftotext; do
-  command -v "$tool" >/dev/null 2>&1 || { echo "      MISSING  $tool"; missing=1; }
+  command -v "$tool" >/dev/null 2>&1 || { echo "MISSING  $tool"; missing=1; }
 done
-command -v claude >/dev/null 2>&1 || echo "      Install the Claude Code CLI: https://docs.anthropic.com/en/docs/claude-code"
-command -v paperclip >/dev/null 2>&1 || echo "      Note: paperclip not found (optional, only used when definitions cite external papers)"
+command -v claude >/dev/null 2>&1 || echo "Install the Claude Code CLI: https://docs.anthropic.com/en/docs/claude-code"
+command -v paperclip >/dev/null 2>&1 || echo "Note: paperclip not found (optional, only used when definitions cite external papers)"
 
-echo ""
 if [ "$missing" = 0 ]; then
   echo "Setup complete."
 else

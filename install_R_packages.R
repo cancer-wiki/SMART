@@ -7,7 +7,8 @@ cat("Installing SMART R dependencies...\n\n")
 
 # --- CRAN packages ---
 cran_pkgs <- c("Seurat", "ggplot2", "dplyr", "tidyverse", "msigdbr",
-               "knitr", "kableExtra", "rmarkdown", "readxl", "devtools", "remotes")
+               "knitr", "kableExtra", "rmarkdown", "readxl", "hdf5r",
+               "devtools", "remotes")
 
 cat("=== CRAN packages ===\n")
 for (pkg in cran_pkgs) {

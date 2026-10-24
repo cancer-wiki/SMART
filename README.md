@@ -110,7 +110,7 @@ A browser window opens at the start. Log in to the journal with your own institu
 | `Outputs/final_report_revised.html` | **The report.** Self-contained, opens in any browser. Start here. |
 | `Outputs/summary.txt` | The verified findings and claims extracted from the paper. |
 | `Outputs/plots/` · `results/` | Every figure and statistical table generated. |
-| `Outputs/analysis.R` *or* `analysis.py` | The exact code that was run. Re-runnable on its own. |
+| `Outputs/preprocess.R` · `analysis.R` | The exact code that was run. Re-runnable on its own. |
 | `Working/` | Drafts, verification checks, definitions and plans. The full audit trail. |
 
 ## Citation
