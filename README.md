@@ -11,7 +11,6 @@
 runs those analyses, and returns a report of which ones held.</p>
 
 [![preprint](https://img.shields.io/badge/preprint-bioRxiv-b31b1b?style=flat-square)](https://www.biorxiv.org/)
-[![docs](https://img.shields.io/badge/docs-available-2f855a?style=flat-square)](https://cancer-wiki.github.io/SMART/)
 [![website](https://img.shields.io/badge/website-cancer--wiki.org-4b3ec9?style=flat-square)](https://cancer-wiki.org)
 [![example report](https://img.shields.io/badge/example-report-c2603a?style=flat-square)](https://cancer-wiki.github.io/SMART/example-report/)
 [![license](https://img.shields.io/badge/license-MIT-2f855a?style=flat-square)](LICENSE)
@@ -84,9 +83,7 @@ cd SMART
 bash setup.sh
 ```
 
-`setup.sh` copies the 20 agents and their reference files into `~/.claude/agents/`, where the Claude Code CLI picks them up. It then installs the R packages (`install_R_packages.R`) and the Python packages (`requirements.txt`), and checks for the command-line tools the pipeline calls.
-
-SMART needs both **R** and **Python 3**. R runs the analysis. Python downloads the paper and reads `.h5ad` files and xlsx supplements. You also need [`jq`](https://jqlang.github.io/jq/), `pdftotext` (from poppler), and Firefox, Chrome or Edge for logging in to the journal.
+This sets up the SMART workflow and installs the required packages. You need **R** and **Python 3** installed first.
 
 ### 2 · Run
 
@@ -98,7 +95,7 @@ bash run_pipeline.sh <output_folder> <paper> <data>
 |---|---|---|
 | `<output_folder>` | Where the case folder is created | `./results/case1` |
 | `<paper>` | DOI, PMID, PubMed URL or nature.com URL | `10.1038/s41467-025-59282-4` |
-| `<data>` | Your single-cell dataset, a Seurat `.rds` or AnnData `.h5ad` | `/path/to/your_data.rds` |
+| `<data>` | Your single-cell dataset: a Seurat `.rds`, an AnnData `.h5ad`, or a folder of raw data (Cell Ranger output) | `/path/to/your_data.rds` |
 
 For example:
 
@@ -106,7 +103,7 @@ For example:
 bash run_pipeline.sh ./results/case1 "10.1038/s41467-025-59282-4" /path/to/your_data.rds
 ```
 
-A browser window opens at the start. Log in to the journal with your own institutional or personal account, then press Enter in the terminal. The pipeline then runs all 20 steps on its own. Each step's log goes to `Working/logs/`. If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
+A browser window opens at the start. Log in to the journal with your own institutional or personal account. Once you're logged in, minimize the window (don't close it), then press Enter in the terminal. The pipeline then runs all 20 steps on its own. Each step's log goes to `Working/logs/`. If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
 
 | What you get | |
 |---|---|
@@ -115,20 +112,6 @@ A browser window opens at the start. Log in to the journal with your own institu
 | `Outputs/plots/` · `results/` | Every figure and statistical table generated. |
 | `Outputs/analysis.R` *or* `analysis.py` | The exact code that was run. Re-runnable on its own. |
 | `Working/` | Drafts, verification checks, definitions and plans. The full audit trail. |
-
-## Documentation
-
-Complete documentation at **[cancer-wiki.github.io/SMART](https://cancer-wiki.github.io/SMART/)**.
-
-| | |
-|---|---|
-| [Quick start](https://cancer-wiki.github.io/SMART/quickstart/) | Install, example case, your own data |
-| [Example reports](https://cancer-wiki.github.io/SMART/example-report/) | Complete reports from real runs, and how to read one |
-| [Pipeline](https://cancer-wiki.github.io/SMART/pipeline/) | The six modules and what each decides |
-| [Case folders](https://cancer-wiki.github.io/SMART/cases/) | Layout, inputs, outputs, resetting a case |
-| [Batch running](https://cancer-wiki.github.io/SMART/batch/) | Many papers, many datasets, in parallel |
-| [Transferability scores](https://cancer-wiki.github.io/SMART/scores/) | How High to Low are assigned |
-| [Agent reference](https://cancer-wiki.github.io/SMART/agents/) | All 20 agents, what each one does |
 
 ## Citation
 

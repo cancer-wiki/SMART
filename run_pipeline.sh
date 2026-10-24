@@ -21,7 +21,7 @@ if [ $# -lt 3 ]; then
   echo ""
   echo "  output_folder    Where the case folder will be created (e.g., ./results/case1)"
   echo "  paper_input      DOI, PMID, PubMed URL, or nature.com URL"
-  echo "  data_path        Path to scRNA-seq data file (.rds or .h5ad)"
+  echo "  data_path        scRNA-seq data: .rds or .h5ad file, or a raw data folder (Cell Ranger output)"
   exit 1
 fi
 
@@ -32,8 +32,8 @@ DATA_PATH="$3"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # --- Validate inputs ---
-if [ ! -f "$DATA_PATH" ]; then
-  echo "ERROR: Data file not found: $DATA_PATH"
+if [ ! -e "$DATA_PATH" ]; then
+  echo "ERROR: Data not found: $DATA_PATH"
   exit 1
 fi
 
@@ -74,7 +74,10 @@ echo "         Paper downloaded to $CASE_DIR/Inputs/"
 # ==============================================================================
 echo "[Step 1] Copying dataset..."
 DATA_EXT="${DATA_PATH##*.}"
-if [ "$DATA_EXT" = "h5ad" ]; then
+if [ -d "$DATA_PATH" ]; then
+  cp -R "$DATA_PATH"/. "$CASE_DIR/Inputs/"
+  echo "         Raw data folder copied into $CASE_DIR/Inputs/"
+elif [ "$DATA_EXT" = "h5ad" ]; then
   cp "$DATA_PATH" "$CASE_DIR/Inputs/data.h5ad"
   echo "         Data copied to $CASE_DIR/Inputs/data.h5ad"
 elif [ "$DATA_EXT" = "rds" ] || [ "$DATA_EXT" = "RDS" ]; then
