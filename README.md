@@ -94,7 +94,7 @@ bash run_pipeline.sh <output_folder> <paper> <data> <tissue>
 | Argument | What it is | Example |
 |---|---|---|
 | `<output_folder>` | Where the case folder is created | `./results/case1` |
-| `<paper>` | DOI, PMID, PMCID, or a doi.org, PubMed, PMC or nature.com URL | `10.1038/s41467-025-59282-4` |
+| `<paper>` | DOI, PMID, PMCID, or a doi.org, PubMed, PMC or nature.com URL | `pubmed_url` |
 | `<data>` | Your single-cell dataset: either the path to a Seurat `.rds` or AnnData `.h5ad` file, or a folder with the raw files (e.g. Cell Ranger output) and the sample metadata | `/path/to/your_data.rds` or `/path/to/your_data_folder/` |
 | `<tissue>` | The tissue or disease your dataset comes from, in quotes | `"colon cancer"` |
 
@@ -103,7 +103,7 @@ bash run_pipeline.sh <output_folder> <paper> <data> <tissue>
 For example:
 
 ```bash
-bash run_pipeline.sh ./results/case1 "10.1038/s41467-025-59282-4" /path/to/your_data.rds "colon cancer"
+bash run_pipeline.sh ./results/case1 pubmed_url /path/to/your_data.rds "colon cancer"
 ```
 
 For a Nature journal paper, a browser window opens at the start.\

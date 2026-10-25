@@ -10,7 +10,7 @@
 #   bash run_pipeline.sh <output_folder> <paper_doi_or_pmid_or_url> <data_path> <tissue>
 #
 # Example:
-#   bash run_pipeline.sh ./test_case "10.1038/s41467-025-59282-4" /path/to/data.rds "colon cancer"
+#   bash run_pipeline.sh ./test_case pubmed_url /path/to/data.rds "colon cancer"
 # ==============================================================================
 
 set -euo pipefail
