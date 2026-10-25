@@ -154,9 +154,19 @@ def _download_nature(doi, out):
     stage = out / "Working" / "_nature_download"
     if stage.exists():
         shutil.rmtree(stage)
-    dl = download_nature.NatureDownloader()
+    dl = None
+    for browser in ("firefox", "chrome", "edge"):
+        try:
+            dl = download_nature.NatureDownloader(browser=browser)
+            dl.login()
+            break
+        except Exception as e:
+            print(f"  Could not start {browser}: {str(e).splitlines()[0] if str(e) else e}")
+            dl = None
+    if dl is None:
+        print("  ERROR: no usable browser found. Install Firefox or Google Chrome.")
+        return "error"
     try:
-        dl.login()
         status = dl.download(doi, stage)
     finally:
         dl.close()
