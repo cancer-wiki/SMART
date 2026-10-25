@@ -38,7 +38,7 @@ if [ ! -e "$DATA_PATH" ]; then
 fi
 
 # --- Create folder structure ---
-mkdir -p "$OUTPUT_DIR/Inputs/data" "$OUTPUT_DIR/Outputs" "$OUTPUT_DIR/Working/logs"
+mkdir -p "$OUTPUT_DIR/data" "$OUTPUT_DIR/Inputs" "$OUTPUT_DIR/Outputs" "$OUTPUT_DIR/Working/logs"
 CASE_DIR="$(cd "$OUTPUT_DIR" && pwd)"
 LOG_DIR="$CASE_DIR/Working/logs"
 
@@ -74,21 +74,21 @@ echo "         Paper downloaded to $CASE_DIR/Inputs/"
 # ==============================================================================
 echo "[Step 1] Copying dataset..."
 if [ -d "$DATA_PATH" ]; then
-  mkdir -p "$CASE_DIR/Inputs/data"
-  cp -r "$DATA_PATH"/. "$CASE_DIR/Inputs/data/"
-  echo "         Data folder copied to $CASE_DIR/Inputs/data/"
+  mkdir -p "$CASE_DIR/data"
+  cp -r "$DATA_PATH"/. "$CASE_DIR/data/"
+  echo "         Data folder copied to $CASE_DIR/data/"
 elif [ -f "$DATA_PATH" ]; then
-  mkdir -p "$CASE_DIR/Inputs/data"
+  mkdir -p "$CASE_DIR/data"
   DATA_EXT="${DATA_PATH##*.}"
   if [ "$DATA_EXT" = "h5ad" ]; then
-    cp "$DATA_PATH" "$CASE_DIR/Inputs/data/data.h5ad"
-    echo "         Data copied to $CASE_DIR/Inputs/data/data.h5ad"
+    cp "$DATA_PATH" "$CASE_DIR/data/data.h5ad"
+    echo "         Data copied to $CASE_DIR/data/data.h5ad"
   elif [ "$DATA_EXT" = "rds" ] || [ "$DATA_EXT" = "RDS" ]; then
-    cp "$DATA_PATH" "$CASE_DIR/Inputs/data/data.rds"
-    echo "         Data copied to $CASE_DIR/Inputs/data/data.rds"
+    cp "$DATA_PATH" "$CASE_DIR/data/data.rds"
+    echo "         Data copied to $CASE_DIR/data/data.rds"
   else
-    cp "$DATA_PATH" "$CASE_DIR/Inputs/data/$(basename "$DATA_PATH")"
-    echo "         Data copied to $CASE_DIR/Inputs/data/$(basename "$DATA_PATH")"
+    cp "$DATA_PATH" "$CASE_DIR/data/$(basename "$DATA_PATH")"
+    echo "         Data copied to $CASE_DIR/data/$(basename "$DATA_PATH")"
   fi
 fi
 echo ""
@@ -160,7 +160,7 @@ echo ""
 # ==============================================================================
 echo "[Step 10] Preparing the data..."
 run_agent "step10_preprocess" \
-  "Launch preprocess-agent-v1 agent on Inputs/data/"
+  "Launch preprocess-agent-v1 agent on data/. Write the final Seurat object to Inputs/data.rds."
 
 if [ ! -f Outputs/data_pre.txt ]; then
   echo "[Step 11] Summarizing the data..."
