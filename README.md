@@ -98,6 +98,8 @@ bash run_pipeline.sh <output_folder> <paper> <data> <tissue>
 | `<data>` | Your single-cell dataset: either the path to a Seurat `.rds` or AnnData `.h5ad` file, or a folder with the raw files (e.g. Cell Ranger output) and the sample metadata | `/path/to/your_data.rds` |
 | `<tissue>` | The tissue or disease your dataset comes from, in quotes | `"colon cancer"` |
 
+**Note:** for the statistical tests to be meaningful, your data needs at least 3 biological samples (donors or patients) per condition.
+
 For example:
 
 ```bash
