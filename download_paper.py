@@ -144,7 +144,12 @@ def _download_nature(doi, out):
     Run download_nature.py into a staging folder, then move Inputs/ into out.
     Staging matters: on a paywall download_nature.py deletes its whole output folder.
     """
-    import download_nature
+    try:
+        import download_nature
+    except ImportError as e:
+        print(f"  ERROR: Nature downloads need the browser packages ({e}).")
+        print("  Run: python3 -m pip install -r requirements.txt   (or bash setup.sh)")
+        return "error"
 
     stage = out / "Working" / "_nature_download"
     if stage.exists():
