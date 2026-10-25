@@ -21,7 +21,7 @@ if [ $# -lt 3 ]; then
   echo ""
   echo "  output_folder    Where the case folder will be created (e.g., ./results/case1)"
   echo "  paper_input      DOI, PMID, PMCID, or a doi.org / PubMed / PMC / nature.com URL"
-  echo "  data_path        Path to scRNA-seq data file (.rds or .h5ad) or folder of raw files"
+  echo "  data_path        Path to a .rds or .h5ad file, or a folder with raw files and metadata"
   exit 1
 fi
 
