@@ -7,27 +7,29 @@
 # final report generation.
 #
 # Usage:
-#   bash run_pipeline.sh <output_folder> <paper_doi_or_pmid_or_url> <data_path>
+#   bash run_pipeline.sh <output_folder> <paper_doi_or_pmid_or_url> <data_path> <tissue>
 #
 # Example:
-#   bash run_pipeline.sh ./test_case "10.1038/s41467-025-59282-4" /path/to/data.rds
+#   bash run_pipeline.sh ./test_case "10.1038/s41467-025-59282-4" /path/to/data.rds "colon cancer"
 # ==============================================================================
 
 set -euo pipefail
 
 # --- Parse arguments ---
-if [ $# -lt 3 ]; then
-  echo "Usage: bash run_pipeline.sh <output_folder> <paper_doi_or_pmid_or_url> <data_path>"
+if [ $# -lt 4 ] || [ -z "$4" ]; then
+  echo "Usage: bash run_pipeline.sh <output_folder> <paper_doi_or_pmid_or_url> <data_path> <tissue>"
   echo ""
   echo "  output_folder    Where the case folder will be created (e.g., ./results/case1)"
   echo "  paper_input      DOI, PMID, PMCID, or a doi.org / PubMed / PMC / nature.com URL"
   echo "  data_path        Path to a .rds or .h5ad file, or a folder with raw files and metadata"
+  echo "  tissue           Tissue or disease of the dataset, in quotes (e.g., \"colon cancer\")"
   exit 1
 fi
 
 OUTPUT_DIR="$1"
 PAPER_INPUT="$2"
 DATA_PATH="$3"
+TISSUE="$4"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
@@ -47,6 +49,7 @@ echo "  TransferAgent Pipeline"
 echo "  Output: $CASE_DIR"
 echo "  Paper:  $PAPER_INPUT"
 echo "  Data:   $DATA_PATH"
+echo "  Tissue: $TISSUE"
 echo "============================================================"
 echo ""
 
@@ -163,12 +166,12 @@ echo ""
 # ==============================================================================
 echo "[Step 10] Preparing the data..."
 run_agent "step10_preprocess" \
-  "Launch preprocess-agent-v1 agent on data/. Write the final Seurat object to Inputs/data.rds."
+  "Launch preprocess-agent-v1 agent on data/, this data is $TISSUE data. Write the final Seurat object to Inputs/data.rds."
 
 if [ ! -f Outputs/data_pre.txt ]; then
   echo "[Step 11] Summarizing the data..."
   run_agent "step11_inspect_data" \
-    "Launch inspect-data-agent agent on Inputs/data.rds"
+    "Launch inspect-data-agent agent on Inputs/data.rds, this data is $TISSUE data."
 else
   echo "[Step 11] Data summary already exists, skipping."
 fi
