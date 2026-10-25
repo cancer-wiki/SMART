@@ -94,7 +94,7 @@ bash run_pipeline.sh <output_folder> <paper> <data>
 | Argument | What it is | Example |
 |---|---|---|
 | `<output_folder>` | Where the case folder is created | `./results/case1` |
-| `<paper>` | DOI, PMID, PubMed URL or nature.com URL | `10.1038/s41467-025-59282-4` |
+| `<paper>` | DOI, PMID, PMCID, or a doi.org, PubMed, PMC or nature.com URL | `10.1038/s41467-025-59282-4` |
 | `<data>` | Your single-cell dataset: a Seurat `.rds`, an AnnData `.h5ad`, or a folder of raw data (Cell Ranger output) | `/path/to/your_data.rds` |
 
 For example:
@@ -103,9 +103,10 @@ For example:
 bash run_pipeline.sh ./results/case1 "10.1038/s41467-025-59282-4" /path/to/your_data.rds
 ```
 
-A browser window opens at the start.\
+For a Nature journal paper, a browser window opens at the start.\
 Log in to the journal with your own institutional or personal account.\
 Once you're logged in, minimize the window (don't close it), then press Enter in the terminal.\
+Any other paper is downloaded from PubMed Central with no login, so it needs to be open access there.\
 The pipeline then runs all 20 steps on its own.\
 Each step's log goes to `Working/logs/`.\
 If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.

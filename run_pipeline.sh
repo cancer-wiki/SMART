@@ -20,7 +20,7 @@ if [ $# -lt 3 ]; then
   echo "Usage: bash run_pipeline.sh <output_folder> <paper_doi_or_pmid_or_url> <data_path>"
   echo ""
   echo "  output_folder    Where the case folder will be created (e.g., ./results/case1)"
-  echo "  paper_input      DOI, PMID, PubMed URL, or nature.com URL"
+  echo "  paper_input      DOI, PMID, PMCID, or a doi.org / PubMed / PMC / nature.com URL"
   echo "  data_path        Path to scRNA-seq data file (.rds or .h5ad) or folder of raw files"
   exit 1
 fi
@@ -63,9 +63,12 @@ run_agent() {
 # STEP 0: Download paper
 # ==============================================================================
 echo "[Step 0] Preparing the paper..."
-echo "         (Browser will open for login — press Enter in terminal when logged in)"
+echo "         (Nature papers: a browser opens for login — press Enter in terminal when logged in)"
 echo ""
-python3 "$SCRIPT_DIR/download_nature.py" "$PAPER_INPUT" "$CASE_DIR"
+if ! python3 "$SCRIPT_DIR/download_paper.py" "$PAPER_INPUT" "$CASE_DIR"; then
+  echo "ERROR: Could not download the paper. Stopping."
+  exit 1
+fi
 echo ""
 echo "         Paper downloaded to $CASE_DIR/Inputs/"
 
