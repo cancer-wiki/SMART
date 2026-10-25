@@ -95,7 +95,7 @@ bash run_pipeline.sh <output_folder> <paper> <data> <tissue>
 |---|---|---|
 | `<output_folder>` | Where the case folder is created | `./results/case1` |
 | `<paper>` | DOI, PMID, PMCID, or a doi.org, PubMed, PMC or nature.com URL | `10.1038/s41467-025-59282-4` |
-| `<data>` | Your single-cell dataset: either the path to a Seurat `.rds` or AnnData `.h5ad` file, or a folder with the raw files (e.g. Cell Ranger output) and the sample metadata | `/path/to/your_data.rds` |
+| `<data>` | Your single-cell dataset: either the path to a Seurat `.rds` or AnnData `.h5ad` file, or a folder with the raw files (e.g. Cell Ranger output) and the sample metadata | `/path/to/your_data.rds` or `/path/to/your_data_folder/` |
 | `<tissue>` | The tissue or disease your dataset comes from, in quotes | `"colon cancer"` |
 
 **Note:** for the statistical tests to be meaningful, your data needs at least 3 biological samples (donors or patients) per condition.
