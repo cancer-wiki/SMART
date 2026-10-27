@@ -114,7 +114,15 @@ The pipeline then runs all 20 steps on its own.\
 Each step's log goes to `Working/logs/`.\
 If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
 
-#### Already have summaries?
+| What you get | |
+|---|---|
+| `Outputs/final_report_revised.html` | **The report.** Self-contained, opens in any browser. Start here. |
+| `Outputs/summary.txt` | The verified findings and claims extracted from the paper. |
+| `Outputs/plots/` · `results/` | Every figure and statistical table generated. |
+| `Outputs/preprocess.R` · `analysis.R` | The exact code that was run. Re-runnable on its own. |
+| `Working/` | Drafts, verification checks, definitions and plans. The full audit trail. |
+
+### 3 · Already have summaries?
 
 If you already have a paper summary, definitions of the paper's terms, or a summary of your dataset, give them as `.txt` files and SMART skips the steps that would write them. Any format works.
 
@@ -133,14 +141,6 @@ bash run_pipeline.sh <output_folder> <paper> <data> <tissue> \
 
 Use any one, two or all three.\
 With both `--paper-summary` and `--definitions`, no paper is needed: pass `-` for `<paper>`.
-
-| What you get | |
-|---|---|
-| `Outputs/final_report_revised.html` | **The report.** Self-contained, opens in any browser. Start here. |
-| `Outputs/summary.txt` | The verified findings and claims extracted from the paper. |
-| `Outputs/plots/` · `results/` | Every figure and statistical table generated. |
-| `Outputs/preprocess.R` · `analysis.R` | The exact code that was run. Re-runnable on its own. |
-| `Working/` | Drafts, verification checks, definitions and plans. The full audit trail. |
 
 ## Citation
 
