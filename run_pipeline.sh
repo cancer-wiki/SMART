@@ -182,7 +182,7 @@ echo ""
 # ==============================================================================
 echo "[Step 12] Checking if the paper logic is worth exploring on your data..."
 run_agent "step12_feasibility" \
-  "Launch transfer-feasibility-v1-agent agent on Outputs/summary.txt"
+  "Launch transfer-feasibility-v2 agent on Outputs/summary.txt"
 
 if [ -f Outputs/feasibility.json ]; then
   PROCEED=$(jq -r '.proceed' Outputs/feasibility.json 2>/dev/null || echo "unknown")
