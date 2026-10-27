@@ -1,0 +1,17 @@
+# Python packages used by the SMART pipeline.
+# Installed by setup.sh (pip install -r requirements.txt).
+
+# download_nature.py: fetch the paper (step 0)
+selenium
+webdriver-manager
+requests
+beautifulsoup4
+
+# check-external-ref agent: parse xlsx / xls supplements
+openpyxl
+xlrd
+
+# preprocess agent: read .h5ad datasets before converting to Seurat
+anndata
+scipy
+pandas

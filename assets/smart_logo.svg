@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 102" width="236" height="102" role="img" aria-label="SMART, a 20-agent workflow">
+  <title>SMART</title>
+  <g transform="translate(6 6) scale(0.4167)">
+    <g fill="none" stroke="#3A4A5A" stroke-width="7" stroke-linecap="round">
+      <path d="M94.5 21.5 L45.5 9.5 L15.5 39.5 L47.5 61.5 L64.5 81.5 L92.5 103.5 L62.5 134.5 L13.5 122.5"/>
+    </g>
+    <g fill="#3A4A5A">
+      <circle cx="45.5" cy="9.5" r="9.5"/><circle cx="15.5" cy="39.5" r="9.5"/>
+      <circle cx="47.5" cy="61.5" r="9.5"/><circle cx="64.5" cy="81.5" r="9.5"/>
+      <circle cx="92.5" cy="103.5" r="9.5"/><circle cx="62.5" cy="134.5" r="9.5"/>
+    </g>
+    <circle cx="94.5" cy="21.5" r="13.5" fill="#B36A5A"/>
+    <circle cx="13.5" cy="122.5" r="13.5" fill="#6485A8"/>
+  </g>
+  <text x="68" y="53" fill="#3A4A5A"
+        font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="47" font-weight="700" letter-spacing="1.5">SMART</text>
+  <text x="118" y="96" fill="#1f2328" text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
+        font-size="20" font-weight="600">20-agent workflow</text>
+</svg>
