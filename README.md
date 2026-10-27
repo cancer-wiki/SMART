@@ -114,6 +114,26 @@ The pipeline then runs all 20 steps on its own.\
 Each step's log goes to `Working/logs/`.\
 If the paper's logic can't be tested on your data, the pipeline stops after step 12 and explains why in `Outputs/feasibility.json`.
 
+#### Already have summaries?
+
+If you already have a paper summary, definitions of the paper's terms, or a summary of your dataset, give them as `.txt` files and SMART skips the steps that would write them. Any format works.
+
+```bash
+bash run_pipeline.sh <output_folder> <paper> <data> <tissue> \
+  --paper-summary paper_summary.txt \
+  --definitions definitions.txt \
+  --data-summary data_summary.txt
+```
+
+| Option | Skips |
+|---|---|
+| `--paper-summary` | Steps 2–6, summarizing the paper |
+| `--definitions` | Steps 7–9, defining the paper's terms in scRNA-seq |
+| `--data-summary` | Steps 10–11, preparing and summarizing the data. `<data>` must then be the ready Seurat `.rds` the summary describes. |
+
+Use any one, two or all three.\
+With both `--paper-summary` and `--definitions`, no paper is needed: pass `-` for `<paper>`.
+
 | What you get | |
 |---|---|
 | `Outputs/final_report_revised.html` | **The report.** Self-contained, opens in any browser. Start here. |
