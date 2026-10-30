@@ -10,7 +10,7 @@
 <p>SMART reads a paper, works out which of its claims your single-cell dataset can test,
 runs those analyses, and returns a report of which ones held.</p>
 
-[![preprint](https://img.shields.io/badge/preprint-bioRxiv-b31b1b?style=flat-square)](https://www.biorxiv.org/)
+[![preprint](https://img.shields.io/badge/preprint-bioRxiv-b31b1b?style=flat-square)](https://doi.org/10.64898/2026.10.28.762506)
 [![website](https://img.shields.io/badge/website-cancer--wiki.org-4b3ec9?style=flat-square)](https://cancer-wiki.org)
 [![example report](https://img.shields.io/badge/example-report-c2603a?style=flat-square)](https://cancer-wiki.github.io/SMART/example-report/)
 [![license](https://img.shields.io/badge/license-MIT-2f855a?style=flat-square)](LICENSE)
@@ -144,15 +144,16 @@ With both `--paper-summary` and `--definitions`, no paper is needed: pass `-` fo
 
 ## Citation
 
-<!-- TODO: fill in once the preprint is posted. -->
-
 ```bibtex
-@article{cheng2026smart,
-  title   = {A multi-agent AI framework for Cross-Cancer Discovery Transfer},
+@article{cheng2026agentic,
+  title   = {Agentic Discovery Transfer Enables Cross-Cancer Discovery at Scale},
   author  = {Cheng, Lingxin and Shireman, Jack and Gogate, Akash and
-             Kendziorski, Christina},
-  journal = {PLACEHOLDER},
-  year    = {2026}
+             Stangis, Maggie and Cai, Yujia and Xie, Yixuan and
+             Khatri, Parth and Dey, Mahua and Kendziorski, Christina},
+  journal = {bioRxiv},
+  year    = {2026},
+  doi     = {10.64898/2026.10.28.762506},
+  url     = {https://doi.org/10.64898/2026.10.28.762506}
 }
 ```
 
